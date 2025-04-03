@@ -15,6 +15,15 @@ const Chat = ({
   const [toast, setToast] = useState<string | null>(null);
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(roomId);
+      alert("Copied to clipboard!");
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
   useEffect(() => {
     if (!socket) return;
 
@@ -71,10 +80,16 @@ const Chat = ({
       <div className="absolute top-4 bg-gray-800 px-4 py-2 rounded-lg text-center">
         <span className="text-lg font-semibold">Room ID: </span>
         <span className="text-yellow-400 font-mono">{roomId}</span>
+        <button
+          onClick={copyToClipboard}
+          className="text-white font-mono text-xs ml-2 hover:cursor-pointer"
+        >
+          Copy
+        </button>
       </div>
 
       {toast && (
-        <div className="absolute top-16 bg-blue-500 text-white px-4 py-2 rounded-lg transition-opacity duration-300">
+        <div className="absolute top-16 bg-white text-black px-4 py-2 rounded-lg transition-opacity duration-300">
           {toast}
         </div>
       )}

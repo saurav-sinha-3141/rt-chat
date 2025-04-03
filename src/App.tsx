@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createRoom, joinRoom } from "./ws_client";
 import Chat from "./Chat";
 import Loader from "./Loader";
+import GithubIcon from "github-icon-link";
 
 function App() {
   const [roomId, setRoomId] = useState("");
@@ -37,6 +38,7 @@ function App() {
         <Loader />
       ) : (
         <div className="flex flex-col space-y-4 h-screen justify-center items-center bg-black text-white font-mono font-bold px-4">
+          <GithubIcon />
           <button
             disabled={!username}
             onClick={handleCreateRoom}
@@ -60,7 +62,7 @@ function App() {
             <button
               onClick={handleJoinRoom}
               disabled={!username || !roomId}
-              className="bg-white text-black px-4 py-2 rounded-lg w-1/3 disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:bg-slate-200"
+              className="bg-white text-black px-4 py-2 rounded-lg w-1/3 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer hover:enabled:bg-slate-200"
             >
               Join Room
             </button>
